@@ -13,4 +13,11 @@
 
 - npx expo start --clear
 
+## REACT NAVIGATE
+
+- npm install @react-navigation/native
+- Add na raiz .npmrc (legacy-peer-deps=true)
+- npx export install react-native-screens react-native-safe-area-context
+- npm install @react-navigation/native-stack
+
 
