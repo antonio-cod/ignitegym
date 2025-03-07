@@ -17,7 +17,8 @@
 
 - npm install @react-navigation/native
 - Add na raiz .npmrc (legacy-peer-deps=true)
-- npx export install react-native-screens react-native-safe-area-context
+- npx expo install react-native-screens
+- npm install react-native-safe-area-context
 - npm install @react-navigation/native-stack
 
 
