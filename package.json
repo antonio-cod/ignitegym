@@ -8,6 +8,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
+  "overrides": {
+    "@react-aria/utils": "3.27.0"
+  },
   "dependencies": {
     "@expo-google-fonts/roboto": "^0.2.3",
     "@gluestack-style/react": "^1.0.57",
