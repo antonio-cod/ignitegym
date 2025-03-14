@@ -4,6 +4,7 @@ import { Group } from "@components/Group"
 
 import { HomeHeader } from "@components/HomeHeader"
 import { Center, HStack, Heading, Text, VStack } from "@gluestack-ui/themed"
+import { ExerciseCard } from "@components/ExerciseCard"
 
 export function Home() {
   const [groups, setGroups] = useState(["Costas", "Bíceps", "Tríceps", "Ombro"])
@@ -37,6 +38,7 @@ export function Home() {
             4
           </Text>
         </HStack>
+          <ExerciseCard />
       </VStack>
     </VStack>
   )
