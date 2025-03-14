@@ -10,6 +10,7 @@ type Props = ComponentProps<typeof Button> & {
 export function Group({ name, isActive, ...rest }: Props) {
   return (
     <Button
+      mr="$3"
       minWidth="$24"
       h="$10"
       bg="$gray600"
@@ -19,7 +20,7 @@ export function Group({ name, isActive, ...rest }: Props) {
       borderColor="$green500"
       borderWidth={isActive ? 1 : 0}
       sx={{
-        ":active":{
+        ":active": {
           borderWidth: 1,
         },
       }}
