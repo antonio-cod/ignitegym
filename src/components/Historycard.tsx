@@ -15,7 +15,7 @@ export function HistoryCard() {
       <VStack mr="$5">
         <Heading 
          color="$white"
-         fontSize="md"
+         fontSize="$md"
          textTransform="capitalize"
          fontFamily="$heading"
         >
