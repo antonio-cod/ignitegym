@@ -11,9 +11,7 @@ export function Home() {
     "Puxada frontal",
     "Remada curvada",
     "Levantamento terra",
-    "1",
-    "2",
-    "3"
+   
   ])
   const [groups, setGroups] = useState(["Costas", "Bíceps", "Tríceps", "Ombro"])
   const [groupSelected, setGroupSelected] = useState("costa")
@@ -27,7 +25,7 @@ export function Home() {
           renderItem={({ item }) => (
             <Group 
               name={item}
-              isActive={ groupSelected === item}
+              isActive={ groupSelected.toLowerCase() === item.toLowerCase()}
               onPress={() => setGroupSelected(item)}
             />
           )}
@@ -46,7 +44,7 @@ export function Home() {
             {exercises.length}
           </Text>
         </HStack>
-        
+
         <FlatList 
           data={exercises} 
           keyExtractor={(item) => item}
