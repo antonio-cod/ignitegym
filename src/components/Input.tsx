@@ -19,8 +19,8 @@ export function Input({isReadOnly = false, ...rest }: Props) {
       opacity={isReadOnly ? 0.5 : 1}
       >
       <InputField 
-      bg="$gray700"
       px="$4"
+      bg="$gray700"
       color="$white"
       fontFamily="$body"
       placeholderTextColor="$gray300"
