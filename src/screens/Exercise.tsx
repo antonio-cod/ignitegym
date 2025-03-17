@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "react-native"
+import { Image, TouchableOpacity } from "react-native"
 
 import { HStack, Heading, Icon } from "@gluestack-ui/themed"
 import { VStack, Text } from "@gluestack-ui/themed"
@@ -49,6 +49,19 @@ export function Exercise() {
       </HStack>
     </VStack>
 
+      <VStack p="$8">
+        <Image
+          source={{
+            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGxCzSNXUQ7RNqnhkvLQ0cXlhwUCG93EDusV3XRIbAdMPZS1GwXRd1ndWNVkLXOuFUQIw&usqp=CAU",
+          }}
+          alt="Imagem manhando costas"
+          mb="$3"
+          resizeMode="cover"
+          rounded="#lg"
+          w="$full"
+          h="$80"
+        />
+      </VStack>
     </VStack>
   )
 }
