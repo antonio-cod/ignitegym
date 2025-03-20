@@ -22,4 +22,13 @@
 - npm install @react-navigation/native-stack
 - npm install @react-navigation/bottom-tabs
 
+## REACT IMAGE
+
+- npx expo install expo-image-picker
+- ADD plugin em app.json
+"expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+
 
