@@ -9,6 +9,7 @@ import { Input } from "@components/Input"
 import { Button } from "@components/Button"
 import { useState } from "react"
 import * as FileSystem from "expo-file-system"
+import { ToastMessage } from "@components/ToastMessage"
 
 export function Profile() {
   const [userPhoto, setUserPhoto] = useState("https://avatars.githubusercontent.com/u/67842667?v=4")
@@ -36,7 +37,7 @@ export function Profile() {
         if ( photoInfo.size && (photoInfo.size / 1024 /1024) > 5) {
           return Alert.alert("Essa imagem é muito grande. Escolha uma até 5MB!")
         }
-        
+
         setUserPhoto(photoURI)
     }
   } catch (error) {
@@ -47,6 +48,14 @@ export function Profile() {
   return (
     <VStack flex={1}>
       <ScreenHeader title="Perfil" />
+
+      <ToastMessage 
+        id="1" 
+        title="Mensagem de exemplo" 
+        description="Tesntando..."
+        action="success"
+        onClose={() => {}}
+      />
 
       <ScrollView contentContainerStyle={{ paddingBottom: 36 }}>
         <Center mt="$6" px="$10">
