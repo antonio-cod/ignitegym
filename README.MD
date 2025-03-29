@@ -31,4 +31,8 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
 
+## MANIPULANDO O FILE
+
+- nnpx expo install expo-file-system
+
 

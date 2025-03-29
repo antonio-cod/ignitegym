@@ -8,6 +8,7 @@ import { UserPhoto } from "@components/UserPhoto"
 import { Input } from "@components/Input"
 import { Button } from "@components/Button"
 import { useState } from "react"
+import * as FileSystem from "expo-file-system"
 
 export function Profile() {
   const [userPhoto, setUserPhoto] = useState("https://avatars.githubusercontent.com/u/67842667?v=4")
@@ -24,7 +25,16 @@ export function Profile() {
       return
     }
 
-    setUserPhoto(photoSelected.assets[0].uri)
+    const photoURI = photoSelected.assets[0].uri
+
+    if (photoURI){
+      const photoInfo = (await FileSystem.getInfoAsync(photoURI)) as {
+        size: number
+      }
+
+      setUserPhoto(photoURI)
+
+    }
   }
   return (
     <VStack flex={1}>
