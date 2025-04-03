@@ -21,7 +21,7 @@ export function ToastMessage({
   title,
   description,
   action = "success",
-  onClose
+  onClose,
 }: Props) {
   return (
     <Toast 

@@ -36,7 +36,7 @@ export function Profile() {
           size: number
         }
 
-        if ( photoInfo.size && (photoInfo.size / 1024 /1024) > 1) {
+        if ( photoInfo.size && (photoInfo.size / 1024 /1024) > 5) {
           return toast.show({
             placement: "top",
             render: ({ id }) => (
