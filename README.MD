@@ -35,4 +35,13 @@
 
 - nnpx expo install expo-file-system
 
+## REACT HOOK FORMS
+
+Documentação: react-hook-form.com
+- npm install react-hook-form
+
+
+
+
+
 
