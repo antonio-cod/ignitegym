@@ -1,14 +1,14 @@
-import { Center, Heading, Image, Text, VStack, ScrollView } from '@gluestack-ui/themed'
+import { Center, Heading, Image, ScrollView, Text, VStack } from '@gluestack-ui/themed';
+import { useNavigation } from '@react-navigation/native';
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
-import { useNavigation } from '@react-navigation/native'
+import backgroundImg from '@assets/background.png';
+import Logo from '@assets/logo.svg';
 
-import backgroundImg from '@assets/background.png'
-import Logo from '@assets/logo.svg'
-
-import { Input } from '@components/Input'
-import { Button } from '@components/Button'
-import { useState } from 'react'
-import { useForm, Controller } from "react-hook-form";
+import { Button } from '@components/Button';
+import { Input } from '@components/Input';
 
 type FormDataProps = {
   name: string;
@@ -17,9 +17,16 @@ type FormDataProps = {
   password_confirm: string;
 }
 
+const signUpSchema = yup.object({
+  name: yup.string().required('Informe o nome'),
+  email: yup.string().required('Informe o e-mail').email('E-mail inválido')
+});
+
 export function SignUp() {
  
-  const { control, handleSubmit, formState: {errors}, } = useForm<FormDataProps>();
+  const { control, handleSubmit, formState: {errors} } = useForm<FormDataProps>({
+    resolver: yupResolver(signUpSchema)
+  });
 
   const navigation = useNavigation()
 
