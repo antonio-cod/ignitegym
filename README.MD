@@ -45,6 +45,10 @@ Documentação: react-hook-form.com
 Biblioteca de validação do imput
 - npm install @hookform/resolvers yup
 
+##  HTTP REQUESTS
+
+- npm install axios
+
 
 
 
