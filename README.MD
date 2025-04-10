@@ -8,6 +8,8 @@
 - npm install --save-dev react-native-svg-transformer --legacy-peer-deps
 
 
+ git config --global user.email "antonio_carlostads@hotmail.com"
+  git config --global user.name "antonio-cod"
 
 ## CLEAN EXPO AND METRO CACHE
 
