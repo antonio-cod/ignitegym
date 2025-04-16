@@ -3,13 +3,15 @@ import {
   useFonts,
   Roboto_700Bold,
   Roboto_400Regular,
-} from "@expo-google-fonts/roboto"
+} from "@expo-google-fonts/roboto";
 
-import { GluestackUIProvider} from "@gluestack-ui/themed"
+import { GluestackUIProvider} from "@gluestack-ui/themed";
 
-import { config } from "./config/gluestack-ui.config"
+import { config } from "./config/gluestack-ui.config";
 
-import { Routes } from "./src/routes"
+import { Routes } from "./src/routes";
+
+import { AuthContext } from "@contexts/AuthContext";
 import { Loading } from '@components/Loading';
 
 export default function App() {
@@ -22,8 +24,14 @@ export default function App() {
         backgroundColor="transparent"
         translucent
         />
-
+      <AuthContext.Provider value={{
+        id: '1',
+        name: 'Antonio',
+        email: 'antonio_carlostads@hotmail.com',
+        avatar: ''
+      }}>
       {fontsLoaded ? <Routes /> : <Loading />}
+      </AuthContext.Provider>
       </GluestackUIProvider>
   )
 }
