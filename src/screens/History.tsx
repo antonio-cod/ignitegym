@@ -3,7 +3,7 @@ import { SectionList } from "react-native"
 
 import { Center, Heading, Text, VStack } from "@gluestack-ui/themed"
 
-import { HistoryCard } from "@components/HistoryCard"
+import { HistoryCard } from "@components/Historycard"
 import { ScreenHeader } from "@components/ScreenHeader"
 
 export function History() {

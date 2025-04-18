@@ -1,6 +1,6 @@
 import { Controller, useForm } from 'react-hook-form'
 import { useNavigation } from "@react-navigation/native"
-import { Center, Heading, Image, Text, VStack, ScrollView } from '@gluestack-ui/themed'
+import { Center, Heading, Image, Text, VStack, ScrollView, useToast, ToastTitle, Toast } from '@gluestack-ui/themed'
 
 import { AuthNavigatorRoutesProps } from "@routes/auth.routes"
 
@@ -10,6 +10,8 @@ import backgroundImg from '@assets/background.png'
 import { Input } from '@components/Input'
 import { Button } from '@components/Button'
 import { useAuth } from '@hooks/useAuth'
+import { AppError } from '@utils/AppError'
+import { useState } from 'react'
 
 
 type FormData = {
@@ -18,9 +20,11 @@ type FormData = {
 }
 
 export function SignIn() {
-  const {signIn } = useAuth();
+const [isLoading, setIsLoading] = useState(false);
 
+  const { signIn } = useAuth();
   const navigation = useNavigation<AuthNavigatorRoutesProps>()
+  const toast = useToast();
 
   const { control, handleSubmit, formState: { errors } } = useForm<FormData>()
 
@@ -29,7 +33,26 @@ export function SignIn() {
   }
 
   async function handleSignIn({ email, password }: FormData) {
-   await signIn(email, password);
+    try {
+      setIsLoading(true);
+      await signIn(email, password);
+
+    } catch (error) {
+      const isAppError = error instanceof AppError;
+      const title = isAppError ? error.message : 'Não foi possivel entrar. tente novamente mais tarde';
+
+      setIsLoading(false);
+
+      toast.show({
+        placement: 'top',
+        render: () => (
+          <Toast backgroundColor='$red500' action="error" variant="outline">
+            <ToastTitle color="$white">{title}</ToastTitle>
+          </Toast>
+        ),
+      });
+    }
+
   }
 
   return (
@@ -88,7 +111,10 @@ export function SignIn() {
               )}
             />
 
-            <Button title="Acessar" onPress={handleSubmit(handleSignIn)} />
+            <Button
+             title="Acessar" 
+             onPress={handleSubmit(handleSignIn)} 
+             isLoading={isLoading} />
 
           </Center>
 
