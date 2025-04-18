@@ -49,6 +49,10 @@ Biblioteca de validação do imput
 
 - npm install axios
 
+## SALVANDO OS DADOS DE AUTENTICAÇÃO DO USUÁRIO NO STORAGE
+
+- npx expo install @react-native-async-storage/async-storage
+
 
 
 

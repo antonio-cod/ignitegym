@@ -3,6 +3,8 @@ import { api } from "@services/api";
 
 import { createContext, ReactNode, useState } from "react";
 
+import { storgeUserSave } from "../storge/storgeUser";
+
 export type AuthContextDataProps = {
   user: UserDTO;
   signIn: (email: string, password: string) => Promise<void>
@@ -22,6 +24,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps){
 
     if(data.user){
       setUser(data.user);
+      storgeUserSave(data.user);
     }
     } catch (error) {
       throw error;
