@@ -13,7 +13,7 @@ import { useAuth } from "@hooks/useAuth"
 export function Routes() {
   const theme = DefaultTheme
   const { user } = useAuth();
-  
+  console.log("USUÁRIO LOGADO =>", user);
   theme.colors.background = gluestackUIConfig.tokens.colors.gray700
 
  

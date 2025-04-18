@@ -9,6 +9,7 @@ import backgroundImg from '@assets/background.png'
 
 import { Input } from '@components/Input'
 import { Button } from '@components/Button'
+import { useAuth } from '@hooks/useAuth'
 
 
 type FormData = {
@@ -17,6 +18,8 @@ type FormData = {
 }
 
 export function SignIn() {
+  const {signIn } = useAuth();
+
   const navigation = useNavigation<AuthNavigatorRoutesProps>()
 
   const { control, handleSubmit, formState: { errors } } = useForm<FormData>()
@@ -25,8 +28,8 @@ export function SignIn() {
     navigation.navigate("signUp")
   }
 
-  function handleSignIn({ email, password }: FormData) {
-    console.log(email, password);
+  async function handleSignIn({ email, password }: FormData) {
+   await signIn(email, password);
   }
 
   return (
