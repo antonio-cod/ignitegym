@@ -3,12 +3,13 @@ import { api } from "@services/api";
 
 import { createContext, ReactNode, useEffect, useState } from "react";
 
-import { storgeUserSave, storageUserGet } from "../storge/storgeUser";
+import { storgeUserSave, storageUserGet, storageUserRemove } from "../storge/storgeUser";
 
 export type AuthContextDataProps = {
   user: UserDTO;
   signIn: (email: string, password: string) => Promise<void>;
-   isLoadingUserStorageData: boolean
+  signOut: () => Promise<void>;
+  isLoadingUserStorageData: boolean;
 }
 
 type AuthContextProviderProps = {
@@ -18,7 +19,7 @@ export const AuthContext = createContext<AuthContextDataProps>({} as AuthContext
 
 export function AuthContextProvider({ children }: AuthContextProviderProps){
   const [user, setUser] = useState<UserDTO>({} as UserDTO);
-  const [isLoadingUserStorageData, setIsLoadingUserStorage] = useState(true);
+  const [isLoadingUserStorageData, setIsLoadingUserStorageData] = useState(true);
 
   async function signIn(email: string, password: string){
     try{
@@ -33,20 +34,35 @@ export function AuthContextProvider({ children }: AuthContextProviderProps){
     }
   }
 
+  async function signOut() {
+    try {
+      setIsLoadingUserStorageData(true);
+      setUser({} as UserDTO);
+
+      await storageUserRemove();
+
+
+    } catch (error) {
+      throw error;
+    } finally {
+      setIsLoadingUserStorageData(false);
+    }
+  }
+
   async function loadUserData(){
     try{
       const userLogged = await storageUserGet();
   
       if(userLogged){
         setUser(userLogged);
-        setIsLoadingUserStorage(false);
+        setIsLoadingUserStorageData(false);
       }
 
     } catch (error) {
       throw error;
 
     } finally {
-      setIsLoadingUserStorage(false);
+      setIsLoadingUserStorageData(false);
     }
   }
 
@@ -58,6 +74,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps){
     <AuthContext.Provider value={{ 
       user, 
       signIn,
+      signOut,
       isLoadingUserStorageData 
       }}>
         {children}
