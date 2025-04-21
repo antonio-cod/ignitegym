@@ -3,7 +3,7 @@ import { api } from "@services/api";
 
 import { createContext, ReactNode, useEffect, useState } from "react";
 
-import { storgeUserSave, storageUserGet, storageUserRemove } from "../storge/storgeUser";
+import { storgeUserSave, storageUserGet, storageUserRemove } from "../storage/storgeUser";
 
 export type AuthContextDataProps = {
   user: UserDTO;
@@ -24,8 +24,9 @@ export function AuthContextProvider({ children }: AuthContextProviderProps){
   async function signIn(email: string, password: string){
     try{
     const { data } = await api.post('/sessions', { email, password });
+    console.log(data);
 
-    if(data.user){
+    if(data.user && data.token){
       setUser(data.user);
       storgeUserSave(data.user);
     }
