@@ -1,4 +1,4 @@
-import { Center, Heading, Image, ScrollView, Text, useToast, Toast, ToastTitle, VStack } from '@gluestack-ui/themed';
+import { Center, Heading, Image, ScrollView, Text, Toast, ToastTitle, useToast, VStack } from '@gluestack-ui/themed';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigation } from '@react-navigation/native';
 import { Controller, useForm } from "react-hook-form";
@@ -13,8 +13,8 @@ import { AppError } from '@utils/AppError';
 
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
-import { useState } from 'react';
 import { useAuth } from '@hooks/useAuth';
+import { useState } from 'react';
 
 type FormDataProps = {
   name: string;

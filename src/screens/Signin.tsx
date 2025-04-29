@@ -22,7 +22,7 @@ type FormData = {
 export function SignIn() {
 const [isLoading, setIsLoading] = useState(false);
 
-  const { singIn } = useAuth();
+  const { signIn } = useAuth();
   const navigation = useNavigation<AuthNavigatorRoutesProps>();
   const toast = useToast();
 
@@ -35,13 +35,13 @@ const [isLoading, setIsLoading] = useState(false);
   async function handleSignIn({ email, password }: FormData) {
     try {
       setIsLoading(true);
-      await singIn(email, password);
+      await signIn(email, password);
 
     } catch (error) {
       const isAppError = error instanceof AppError;
 
       const title = isAppError ? error.message : 'Não foi possivel entrar. tente novamente mais tarde';
-
+      console.log()
       toast.show({
         placement: 'top',
         render: () => (
