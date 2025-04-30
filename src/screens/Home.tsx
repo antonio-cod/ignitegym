@@ -16,7 +16,7 @@ import { ExerciseDTO } from "@dtos/ExerciseDTO"
 
 export function Home() {
   const [groups, setGroups] = useState<string[]>([]);
-  const [exercises, setExercises] = useState<ExerciseDTO[]>([])
+  const [exercises, setExercises] = useState<ExerciseDTO[]>([]);
   const toast = useToast();
   const [groupSelected, setGroupSelected] = useState("costa")
 
@@ -106,8 +106,10 @@ export function Home() {
         <FlatList
           data={exercises}
           keyExtractor={(item) => item.id}
-          renderItem={() => (
-            <ExerciseCard onPress={handleOpenExerciseDetails} />
+          renderItem={({ item }) => (
+            <ExerciseCard onPress={handleOpenExerciseDetails} 
+            data={item}
+            />
           )}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 20 }}
