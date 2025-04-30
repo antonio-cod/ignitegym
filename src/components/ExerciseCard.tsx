@@ -5,6 +5,7 @@ import { Text } from "@gluestack-ui/themed"
 import { Icon } from "@gluestack-ui/themed"
 import { VStack } from "@gluestack-ui/themed"
 import { HStack } from "@gluestack-ui/themed"
+import { api } from "@services/api"
 import { ChevronRight } from "lucide-react-native"
 import { TouchableOpacity, TouchableOpacityProps} from "react-native"
 
@@ -22,15 +23,13 @@ export function ExerciseCard({ data, ...rest }: Props) {
       rounded="$md"
       mb="$3"
     >
-      <Image source={{
-        uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnMVV_bsEttU6V4-3o9T5j5d7AZtJdxM6N1Q&s"
-      }}
+      <Image source={{ uri: `${api.defaults.baseURL}/exercise/thumb/${data.thumb}` }}
         alt="Imagem do exercício"
         w="$16"
         h="$16"
         rounded="$md"
         mr="$4"
-        resizeMode="cover"
+        resizeMode="center"
         />
 
         <VStack flex={1}>
