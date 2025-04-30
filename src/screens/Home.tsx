@@ -24,8 +24,8 @@ export function Home() {
 
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
-  function handleOpenExerciseDetails() {
-    navigation.navigate("exercise")
+  function handleOpenExerciseDetails(exerciseId: string) {
+    navigation.navigate('exercise', { exerciseId });
   }
 
   async function fetchGroups() {
@@ -114,7 +114,8 @@ export function Home() {
           data={exercises}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <ExerciseCard onPress={handleOpenExerciseDetails} 
+            <ExerciseCard
+             onPress={() => handleOpenExerciseDetails(item.id)} 
             data={item}
             />
           )}
