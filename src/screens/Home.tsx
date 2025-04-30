@@ -12,9 +12,11 @@ import { AppNavigatorRoutesProps } from "@routes/app.routes"
 import { AppError } from "@utils/AppError"
 import { api } from "@services/api"
 import { ExerciseDTO } from "@dtos/ExerciseDTO"
+import { Loading } from "@components/Loading"
 
 
 export function Home() {
+  const [isLoanding, setIsLoanding] = useState(true);
   const [groups, setGroups] = useState<string[]>([]);
   const [exercises, setExercises] = useState<ExerciseDTO[]>([]);
   const toast = useToast();
@@ -48,6 +50,7 @@ export function Home() {
 
   async function fetchExercisesByGroup() {
     try {
+      setIsLoanding(true);
       const response = await api.get(`/exercises/bygroup/${groupSelected}`);
       setExercises(response.data);
 
@@ -63,6 +66,8 @@ export function Home() {
           </Toast>
         ),
       });
+    } finally {
+      setIsLoanding(false);
     }
   }
 
@@ -92,6 +97,8 @@ export function Home() {
         contentContainerStyle={{ paddingHorizontal: 32 }}
         style={{ marginVertical: 40, maxHeight: 44, minHeight: 44 }}
       />
+      {
+        isLoanding ? <Loading /> :
       <VStack px="$8" flex={1}>
         <HStack justifyContent="space-between" mb="$5" alignItems="center">
           <Heading color="$gray200" fontSize="$md" fontFamily="$heading">
@@ -115,6 +122,7 @@ export function Home() {
           contentContainerStyle={{ paddingBottom: 20 }}
         />
       </VStack>
+      }
     </VStack>
   )
 }
