@@ -50,6 +50,14 @@ Biblioteca de validação do imput
 
 - npx expo install @react-native-async-storage/async-storage
 
+## ALTERNATIVA PARA CORRIGIR O PROBLEMA DA ANIMAÇÃO DO GIF UTILIZAR UMA BIBLIOTECA PARA IMAGE
+
+npm install expo-image
+npm uninstall expo-image
+// preferi aguardar a correção sair da propria biblioteca pois a utilização do expo-image pode implica no funcionamento da biblioteca Gluestack :(
+  
+
+
 
 
 
