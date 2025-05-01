@@ -17,12 +17,14 @@ import { ToastTitle } from "@gluestack-ui/themed"
 import { api } from "@services/api"
 import { useEffect, useState } from "react"
 import { ExerciseDTO } from "@dtos/ExerciseDTO"
+import { Loading } from "@components/Loading"
 
 type RouteParamsProps = {
   exerciseId: string;
 }
 
 export function Exercise() {
+  const [isLoading, setIsLoading] = useState(true);
   const [exercise, setExercise] = useState<ExerciseDTO>({} as ExerciseDTO);
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
@@ -37,6 +39,7 @@ export function Exercise() {
 
   async function fetchExerciseDetails(){
     try {
+      setIsLoading(true)
       const response = await api.get(`/exercises/${exerciseId}`);
       setExercise(response.data);
 
@@ -52,6 +55,8 @@ export function Exercise() {
               </Toast>
             ),
           });
+        } finally{
+          setIsLoading(false)
         }
   }
 
@@ -91,6 +96,7 @@ export function Exercise() {
       </HStack>
     </VStack>
 
+    {isLoading ? <Loading /> :
     <ScrollView 
      showsVerticalScrollIndicator={false}
      contentContainerStyle={{ paddingBottom: 32 }}
@@ -124,6 +130,7 @@ export function Exercise() {
         </Box>
       </VStack>
     </ScrollView>
+      }
     </VStack>
   )
 }
