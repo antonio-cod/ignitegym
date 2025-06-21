@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { ScrollView, TouchableOpacity } from "react-native"
-import { VStack, Text, Center, Heading, useToast, Toast } from "@gluestack-ui/themed"
+import { VStack, Text, Center, Heading, useToast, Toast, onChange } from "@gluestack-ui/themed"
 
 import * as ImagePicker from "expo-image-picker"
 import * as FileSystem from "expo-file-system"
@@ -10,11 +10,30 @@ import { UserPhoto } from "@components/UserPhoto"
 import { Input } from "@components/Input"
 import { Button } from "@components/Button"
 import { ToastMessage } from "@components/ToastMessage"
+import { useForm, Controller } from "react-hook-form"
+import { useAuth } from "@hooks/useAuth"
+
+const PHOTO_SIZE = 33;
+
+type FormDataProps = {
+  email: string;
+  name: string;
+  password: string;
+  old_password: string;
+  confirm_password: string;
+}
 
 export function Profile() {
   const [userPhoto, setUserPhoto] = useState("https://avatars.githubusercontent.com/u/67842667?v=4")
 
-  const toast = useToast()
+  const toast = useToast();
+  const { user } = useAuth();
+  const {control} = useForm<FormDataProps>({
+    defaultValues: {
+      name: user.name,
+      email: user.email
+    }
+  });
 
   async function handleUserPhotoSelect(){
     try {
@@ -80,21 +99,33 @@ export function Profile() {
             </Text>
           </TouchableOpacity>
 
-        <Center w="$full" gap="$4">
-          <Input placeholder="Nome" bg="$gray600" />
-          <Input value="antonio_carlostads@hotmail.com" bg="$gray600"  isReadOnly/>
-        </Center>
+        <Controller
+          control={control}
+          name="name"
+          render={({ field: { value, onChange }}) => (
+           <Input
+              bg="$gray600"
+              placeholder="Nome"
+              onChangeText={onChange}
+              value={value}
+            />
+          )}  
+        />
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { value, onChange }}) => (
+           <Input
+              bg="$gray600"
+              placeholder="E-mail"
+              isReadOnly
+              onChangeText={onChange}
+              value={value}
+            />
+          )}  
+        />
 
-        <Heading 
-        alignSelf="flex-start"
-        fontFamily="$heading"
-        color="$gray200"
-        fontSize="$md"
-        mt="$12"
-        mb="$2"
-        >
-          Alterar senha
-        </Heading>
+        
 
         <Center w="$full" gap="$4">
           <Input placeholder="Senha antiga" bg="$gray600" secureTextEntry />
